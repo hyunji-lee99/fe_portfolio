@@ -1,11 +1,12 @@
+import { get } from "https";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const TitleDiv=styled.div`
   position:absolute;
   white-space:nowrap;
   font-family:'jejudoldam';
-  z-index:2;
+  z-index:1;
 `
 const TitleUnmask = styled.h1`
   color:transparent;
@@ -18,8 +19,28 @@ const TitleUnmask = styled.h1`
       font-size:3rem;
     }
 `
+const translateBackgroundMask=(move:number)=>keyframes`
+  0%,100%{
+    transform : translateY(0px);
+  }
+  50%{
+    transform : translateY(${2*move}px);
+  }
+`
+const translateTitleMask=(move:number)=>keyframes`
+  0%,100%{
+    transform : translateY(0px);
+  }
+  50%{
+    transform : translateY(${2*move}px);
+  }
+`
+interface MoveRange {
+  height:number;
+  top:number;
+}
 
-const TextBackgroundOnMouseMove=styled.div`
+const TextBackgroundOnMouseMove=styled.div<MoveRange>`
   height:100px;
   z-index:1;
   color:#6f3f06;
@@ -27,12 +48,15 @@ const TextBackgroundOnMouseMove=styled.div`
   top:0;
   overflow:hidden;
   -webkit-text-stroke: 1px black;
+  animation: ${props=>translateBackgroundMask(props.height-props.top)} 5s linear infinite;
   @media screen and (max-width:900px){
       height:50px;
     }
 `
-const TitleMask = styled.h1`
+
+const TitleMask = styled.h1<MoveRange>`
   font-size:7.9rem;
+  animation: ${props=>translateTitleMask(-props.height+props.top)} 5s linear infinite;
   @media screen and (max-width:900px){
       font-size:5rem;
     }
@@ -42,28 +66,25 @@ const TitleMask = styled.h1`
 `
 
 export function Title(){
-    const [PosY, setPosY]=useState(0);
+    const [PosY, setPosY]=useState({
+      height:0,
+      top:0,
+    });
     
     useEffect(()=>{
-        const getOffset=(e:any)=>{
-            const titleElement=document.getElementById('title');
+      const titleElement=document.getElementById('title');
                 if (titleElement){
-                    setPosY(e.clientY-titleElement.getBoundingClientRect().top);
+                  const titleDivInfo=titleElement.getBoundingClientRect();
+                    setPosY((prev)=>{
+                      return {...prev, height:titleDivInfo.height, top:titleDivInfo.top}
+                    });
                 }
-        }
-        const onMouseMove=()=>{
-            window.addEventListener('mousemove',getOffset)
-        }
-        onMouseMove();
-        return()=>{
-            window.removeEventListener('mousemove',getOffset)
-        };
     },[])
 
     return(
         <TitleDiv id="title">
-            <TextBackgroundOnMouseMove style={{transform:`translateY(${PosY}px)`}}>
-                <TitleMask style={{transform:`translateY(${-PosY}px)`}}>Frontend<br/>Portfolio</TitleMask>
+            <TextBackgroundOnMouseMove height={PosY.height} top={PosY.top} >
+                <TitleMask height={PosY.height} top={PosY.top}>Frontend<br/>Portfolio</TitleMask>
                 </TextBackgroundOnMouseMove>
                 <TitleUnmask>Frontend<br/>Portfolio</TitleUnmask>
         </TitleDiv>
