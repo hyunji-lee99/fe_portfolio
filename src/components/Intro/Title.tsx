@@ -1,12 +1,21 @@
-import { get } from "https";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import styled, { keyframes } from "styled-components";
 
-const TitleDiv=styled.div`
+const SlideDownTitle=keyframes`
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+`
+const TitleDiv=styled.div<{startAnimation:boolean}>`
   position:absolute;
   white-space:nowrap;
   font-family:'jejudoldam';
   z-index:1;
+  animation: ${(props)=>props.startAnimation? SlideDownTitle:null} 0.5s linear;
 `
 const TitleUnmask = styled.h1`
   color:transparent;
@@ -21,26 +30,26 @@ const TitleUnmask = styled.h1`
 `
 const translateBackgroundMask=(move:number)=>keyframes`
   0%,100%{
-    transform : translateY(0px);
+    transform : translateY(-100px);
   }
   50%{
-    transform : translateY(${2*move}px);
+    transform : translateY(${move}px);
   }
 `
 const translateTitleMask=(move:number)=>keyframes`
   0%,100%{
-    transform : translateY(0px);
+    transform : translateY(100px);
   }
   50%{
-    transform : translateY(${2*move}px);
+    transform : translateY(${move}px);
   }
 `
-interface MoveRange {
+interface TitleProps{
   height:number;
-  top:number;
+  startAnimation:boolean;
 }
 
-const TextBackgroundOnMouseMove=styled.div<MoveRange>`
+const TextBackgroundOnMouseMove=styled.div<TitleProps>`
   height:100px;
   z-index:1;
   color:#6f3f06;
@@ -48,15 +57,15 @@ const TextBackgroundOnMouseMove=styled.div<MoveRange>`
   top:0;
   overflow:hidden;
   -webkit-text-stroke: 1px black;
-  animation: ${props=>translateBackgroundMask(props.height-props.top)} 5s linear infinite;
+  animation: ${(props)=>props.startAnimation? translateBackgroundMask(props.height) :null} 5s linear infinite;
   @media screen and (max-width:900px){
       height:50px;
     }
 `
 
-const TitleMask = styled.h1<MoveRange>`
+const TitleMask = styled.h1<TitleProps>`
   font-size:7.9rem;
-  animation: ${props=>translateTitleMask(-props.height+props.top)} 5s linear infinite;
+  animation: ${(props)=>props.startAnimation? translateTitleMask(-props.height) :null} 5s linear infinite;
   @media screen and (max-width:900px){
       font-size:5rem;
     }
@@ -66,27 +75,30 @@ const TitleMask = styled.h1<MoveRange>`
 `
 
 export function Title(){
-    const [PosY, setPosY]=useState({
-      height:0,
-      top:0,
-    });
+    const [PosY, setPosY]=useState(0);
+    const [onTitle, setOnTitle]=useState(true);
+    const {ref, inView}=useInView();
     
     useEffect(()=>{
-      const titleElement=document.getElementById('title');
+      if (inView){
+        setOnTitle(true);
+        const titleElement=document.getElementById('title');
                 if (titleElement){
                   const titleDivInfo=titleElement.getBoundingClientRect();
-                    setPosY((prev)=>{
-                      return {...prev, height:titleDivInfo.height, top:titleDivInfo.top}
-                    });
+                    setPosY(titleDivInfo.height);
                 }
-    },[])
+      }
+      else{
+        setOnTitle(false)
+      }
+    },[inView])
 
     return(
-        <TitleDiv id="title">
-            <TextBackgroundOnMouseMove height={PosY.height} top={PosY.top} >
-                <TitleMask height={PosY.height} top={PosY.top}>Frontend<br/>Portfolio</TitleMask>
-                </TextBackgroundOnMouseMove>
-                <TitleUnmask>Frontend<br/>Portfolio</TitleUnmask>
+        <TitleDiv ref={ref} startAnimation={onTitle} id="title">
+            <TitleUnmask>Frontend<br/>Portfolio</TitleUnmask>
+            <TextBackgroundOnMouseMove height={PosY} startAnimation={onTitle}>
+                <TitleMask height={PosY} startAnimation={onTitle}> Frontend<br/>Portfolio</TitleMask>
+            </TextBackgroundOnMouseMove>
         </TitleDiv>
 
     );

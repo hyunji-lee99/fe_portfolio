@@ -21,7 +21,7 @@ const wave=keyframes`
 
 const swell=keyframes`
   0%, 100% {
-    transform: translate3d(0, -25px, 0);
+    transform: translate3d(0, -20px, 0);
   }
   50% {
     transform: translate3d(0, 5px, 0);

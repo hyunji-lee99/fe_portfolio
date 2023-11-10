@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 
 const ButtonDiv=styled.div`
-    z-index:3;
+    z-index:2;
     bottom:10%;
     position:absolute;
     width:50px;
@@ -14,6 +14,9 @@ const ButtonDiv=styled.div`
     justify-content:center;
     align-items:center;
     color:white;
+    @media screen and (max-width:900px){
+        bottom:5%;
+    }
 `
 
 const Button = styled.button`
