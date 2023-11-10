@@ -2,3 +2,13 @@
     font-family: "jejudoldam";
     src: url("./EF_jejudoldam.otf");
 }
+
+@font-face {
+    font-family: "SUITE-Bold";
+    src:url("./SUITE-Bold.otf");
+}
+
+@font-face {
+    font-family: "SUITE-Regular";
+    src: url("./SUITE-Regular.otf");
+}

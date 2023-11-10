@@ -4,6 +4,7 @@ import styled from "styled-components";
 import '../fonts/font.css';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import "../fonts/font.css";
 
 const HeaderDiv = styled.div`
     position:fixed;
@@ -12,11 +13,11 @@ const HeaderDiv = styled.div`
     width:100vw;
     padding:0 5%;
     height:100px;
-    background:transparent;
     display:flex;
     align-items:center;
     justify-content:space-between;
     font-family:'jejudoldam';
+    background-color:white;
     @media screen and (max-width:900px){
       padding:0;
     }
@@ -59,6 +60,7 @@ const ResponsiveMenu=styled.div`
 
 const RespMenuUnderLogo=styled.ul`
     list-style:none;
+    background-color:white;
     position:absolute;
     display:flex;
     flex-direction:column;
@@ -67,34 +69,39 @@ const RespMenuUnderLogo=styled.ul`
     height:200%;
     text-align:center;
     top:100px;
-    font-family:none;
+    font-family:"SUITE-Bold";
     @media screen and (min-width:900px){
       display:none;
     }
 `
 
-const onClickIntro=()=>{
-  window.scrollTo({left:0,top:0,behavior:"smooth"});
-}
-
-const onClickAbout=()=>{
-  window.scrollTo({left:0,top:window.innerHeight,behavior:"smooth"});
-}
-
-const onClickSkill=()=>{
-  window.scrollTo({left:0,top:2*window.innerHeight,behavior:"smooth"});
-}
-
-const onClickProject=()=>{
-  window.scrollTo({left:0,top:3*window.innerHeight,behavior:"smooth"});
-}
-
-const onClickChat=()=>{
-  window.scrollTo({left:0,top:4*window.innerHeight,behavior:"smooth"});
-}
 
 function HeaderMenu() {
   const [respMenu, setRespMenu] = useState(false);
+  const onClickIntro=()=>{
+    setRespMenu(false);
+    window.scrollTo({left:0,top:0,behavior:"smooth"});
+  }
+  
+  const onClickAbout=()=>{
+    setRespMenu(false);
+    window.scrollTo({left:0,top:window.innerHeight,behavior:"smooth"});
+  }
+  
+  const onClickSkill=()=>{
+    setRespMenu(false);
+    window.scrollTo({left:0,top:2*window.innerHeight,behavior:"smooth"});
+  }
+  
+  const onClickProject=()=>{
+    setRespMenu(false);
+    window.scrollTo({left:0,top:3*window.innerHeight,behavior:"smooth"});
+  }
+  
+  const onClickChat=()=>{
+    setRespMenu(false);
+    window.scrollTo({left:0,top:4*window.innerHeight,behavior:"smooth"});
+  }
     return (
       <HeaderDiv>
         <Logo onClick={onClickIntro}>HYUNJI</Logo>
