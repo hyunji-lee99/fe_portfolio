@@ -28,11 +28,13 @@ const SlideRightDescription=keyframes`
   }
 `
 
-const Description=styled.div<{startAnimation:boolean}>`
+const Description=styled.div`
   font-size:2rem;
   line-height:4rem;
   white-space:nowrap;
-  animation: ${(props)=>props.startAnimation? SlideRightDescription:null} 1s linear;
+  &.startAnimation{
+    animation: ${SlideRightDescription} 0.5s linear;
+  }
   @media screen and (max-width:900px){
     font-size:1.2rem;
     line-height:3rem;
@@ -54,7 +56,7 @@ const InfoDiv=styled.div`
   height:80%;
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  justify-content:center;
   @media screen and (max-width:900px){
     width:100%;
   }
@@ -64,6 +66,7 @@ const InfoDiv=styled.div`
 const Info=styled.div`
   width:100%;
   height:100px;
+  margin: 10px 0;
   display:flex;
   align-items:center;
   padding: 0 5%;
@@ -79,6 +82,7 @@ const Info=styled.div`
   &:nth-child(4){
     animation: ${RotateInfo} 1s 4.5s infinite linear;
   }
+  
 `
 const InfoTitle=styled.span`
   font-size:2rem;
@@ -128,7 +132,7 @@ export function About(){
       const returnRenderInfoData=InfoData.map(
         (data)=>{
           return (
-          <Info>
+          <Info className={onAbout?"startAnimation":""}>
             <InfoTitle>{data.title}</InfoTitle>
             <InfoContent>{data.content}</InfoContent>
           </Info>
@@ -148,7 +152,7 @@ export function About(){
     },[inView])
     return(
     <Div>
-        <Description ref={ref} startAnimation={onAbout}>
+        <Description ref={ref} className={onAbout?"startAnimation":""}>
           <BoldFont>성취하며 느낀 행복</BoldFont>을 오랫동안 기억하고,
           <br/>
           <BorderBottomGradient><BoldFont>차근차근</BoldFont> 꾸준하게</BorderBottomGradient> 성장 중인

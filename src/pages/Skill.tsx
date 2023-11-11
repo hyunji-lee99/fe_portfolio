@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 import { DownButton } from "../components/common/DownButton";
+import { ClickMessage } from "../components/Skill/ClickMessage";
+import {RotateSkillCube} from "../components/Skill/RotateSkillCube";
 
 const Div = styled.div`
   width:100vw;
@@ -13,7 +15,7 @@ const Div = styled.div`
 export function Skill(){
     return(
     <Div>
-        skill
+        <RotateSkillCube></RotateSkillCube>
         <DownButton location={3}/>
     </Div>);
 }

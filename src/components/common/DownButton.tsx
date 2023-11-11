@@ -41,7 +41,7 @@ const BellEffect=keyframes`
 `
 
 
-const AnimationEffect_One = styled.div`
+const AnimationEffectOne = styled.div`
     width:20%;
     height:20%;
     border-radius:50%;
@@ -51,7 +51,7 @@ const AnimationEffect_One = styled.div`
     animation: ${BellEffect} 3s infinite linear;
 `
 
-const AnimationEffect_Two = styled.div`
+const AnimationEffectTwo = styled.div`
     width:20%;
     height:20%;
     border-radius:50%;
@@ -74,8 +74,8 @@ export function DownButton(location:DownButtonProps){
             <Button>
                 <FontAwesomeIcon icon={faArrowDown as IconProp} />
             </Button>
-            <AnimationEffect_One/>
-            <AnimationEffect_Two/>
+            <AnimationEffectOne/>
+            <AnimationEffectTwo/>
         </ButtonDiv>
     );
 }

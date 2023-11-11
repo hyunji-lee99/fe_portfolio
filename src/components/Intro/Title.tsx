@@ -10,12 +10,11 @@ const SlideDownTitle=keyframes`
     transform: translateY(0px);
   }
 `
-const TitleDiv=styled.div<{startAnimation:boolean}>`
+const TitleDiv=styled.div`
   position:absolute;
   white-space:nowrap;
   font-family:'jejudoldam';
   z-index:1;
-  animation: ${(props)=>props.startAnimation? SlideDownTitle:null} 0.5s linear;
 `
 const TitleUnmask = styled.h1`
   color:transparent;
@@ -94,7 +93,7 @@ export function Title(){
     },[inView])
 
     return(
-        <TitleDiv ref={ref} startAnimation={onTitle} id="title">
+        <TitleDiv ref={ref} className={onTitle?"startAnimation":""} id="title">
             <TitleUnmask>Frontend<br/>Portfolio</TitleUnmask>
             <TextBackgroundOnMouseMove height={PosY} startAnimation={onTitle}>
                 <TitleMask height={PosY} startAnimation={onTitle}> Frontend<br/>Portfolio</TitleMask>

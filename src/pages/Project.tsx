@@ -1,4 +1,3 @@
-import { ComponentProps, forwardRef } from "react";
 import { styled } from "styled-components";
 import { DownButton } from "../components/common/DownButton";
 

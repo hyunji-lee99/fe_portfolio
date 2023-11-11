@@ -10,7 +10,7 @@ const HeaderDiv = styled.div`
     position:fixed;
     z-index:3;
     top:0;
-    width:100vw;
+    width:100%;
     padding:0 5%;
     height:100px;
     display:flex;
@@ -20,6 +20,9 @@ const HeaderDiv = styled.div`
     background-color:white;
     @media screen and (max-width:900px){
       padding:0;
+    }
+    @media screen and (min-width:1200px){
+      padding: 0 10%;
     }
 `
 const Logo = styled.h3`
@@ -126,6 +129,7 @@ function HeaderMenu() {
           <FontAwesomeIcon icon={faBars as IconProp} />
         </ResponsiveMenu>
       </HeaderDiv>
+      
     );
   }
   

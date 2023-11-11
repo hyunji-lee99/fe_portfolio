@@ -1,5 +1,4 @@
 import styled, {keyframes} from "styled-components";
-import wave1 from '../../images/wave.svg';
 
 const Ocean = styled.div`
   height: 30%;
@@ -27,9 +26,9 @@ const swell=keyframes`
     transform: translate3d(0, 5px, 0);
   }
 `
-// https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg
+
 const Wave = styled.div`
-  background: url(${wave1}) repeat-x;
+  background: url("/images/intro/wave.svg") repeat-x;
   position: absolute;
   top: -198px;
   width: 100%;
@@ -47,6 +46,7 @@ const Wave = styled.div`
 `
 
 export function WaveBackground(){
+  
     return(
         <Ocean>
             <Wave/>
