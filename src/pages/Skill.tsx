@@ -6,6 +6,7 @@ import {RotateSkillCube} from "../components/Skill/RotateSkillCube";
 const Div = styled.div`
   width:100vw;
   height:100vh;
+  padding:100px 10%;
   display:flex;
   align-items:center;
   justify-content:center;

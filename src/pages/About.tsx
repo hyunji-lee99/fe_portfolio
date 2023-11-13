@@ -1,9 +1,15 @@
 import { keyframes, styled } from "styled-components";
 import { DownButton } from "../components/common/DownButton";
 import '../fonts/font.css';
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from "react";
-
+import { RenderEducation } from "../components/About/RenderEducation";
+import { RenderCareer } from "../components/About/RenderCareer";
+import { RenderEtc } from "../components/About/RenderEtc";
+import { RenderContact } from "../components/About/RenderContact";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const Div = styled.div`
   width:100vw;
@@ -16,6 +22,7 @@ const Div = styled.div`
   position: relative;
   @media screen and (max-width:900px){
     flex-direction:column;
+    justify-content:center;
   }
 `
 
@@ -41,59 +48,17 @@ const Description=styled.div`
   }
 `
 
-const RotateInfo=keyframes`
-  0%, 100%{
-      transform: rotate(-1deg);
-  }
-  50%{
-      transform: rotate(1deg)
-  }
-
-`
-
 const InfoDiv=styled.div`
   width:40%;
   height:80%;
   display:flex;
-  flex-direction:column;
   justify-content:center;
+  align-items:center;
+  position:relative;
   @media screen and (max-width:900px){
     width:100%;
+    height: 60%;
   }
-  
-`
-
-const Info=styled.div`
-  width:100%;
-  height:100px;
-  margin: 10px 0;
-  display:flex;
-  align-items:center;
-  padding: 0 5%;
-  justify-content:space-around;
-  box-shadow: rgba(149, 160, 165, 0.2) 0px 8px 24px;
-  animation: ${RotateInfo} 1s infinite linear;
-  &:nth-child(2){
-    animation: ${RotateInfo} 1s 1.5s infinite linear;
-  }
-  &:nth-child(3){
-    animation: ${RotateInfo} 1s 3s infinite linear;
-  }
-  &:nth-child(4){
-    animation: ${RotateInfo} 1s 4.5s infinite linear;
-  }
-  
-`
-const InfoTitle=styled.span`
-  font-size:2rem;
-  @media screen and (max-width:900px){
-    font-size:1.5rem;
-  }
-  
-`
-const InfoContent=styled.span`
-  font-size:1rem;
-
 `
 
 const BoldFont=styled.span`
@@ -106,42 +71,33 @@ const BorderBottomGradient=styled.span`
   background-size: 100% 30%;
   background-image: linear-gradient(90deg, #7FB4E2 0%,#aad4e4 100%);
 `
+
+const Button=styled.button`
+  font-size:1rem;
+  border-radius:50%;
+  background-color:#87CEEB;
+  color:white;
+  border:none;
+  width:30px;
+  height:30px;
+  text-align:center;
+  margin: 0 2%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  @media screen and (max-width:768px){
+    width:20px;
+    height:20px;
+    font-size:0.8rem;
+  }
+`
+
 export function About(){
     const {ref, inView}=useInView();
     const [onAbout, setOnAbout]=useState(true);
-    const InfoData=[
-      {
-        title:'이메일',
-        content:'hyunji0483@naver.com'
-      },
-      {
-        title:'학력',
-        content:'경북대학교 컴퓨터학부'
-      },
-      {
-        title:'경력',
-        content:'다이브(주) 프리랜서 개발자'
-      },
-      {
-        title:'사이트',
-        content:'https://1eehyunji.tistory.com/'
-      }
-    ]
-
-    const renderInfoData=():JSX.Element[]=>{
-      const returnRenderInfoData=InfoData.map(
-        (data)=>{
-          return (
-          <Info className={onAbout?"startAnimation":""}>
-            <InfoTitle>{data.title}</InfoTitle>
-            <InfoContent>{data.content}</InfoContent>
-          </Info>
-          );
-        }
-      );
-      return returnRenderInfoData;  
-    }
-
+    const [currentInfo, setCurrentInfo]=useState(1);
+    
     useEffect(()=>{
       if (inView){
         setOnAbout(true)
@@ -150,6 +106,25 @@ export function About(){
         setOnAbout(false)
       }
     },[inView])
+    
+    
+  const onClickPrevButton=()=>{
+      if (currentInfo===1){
+        setCurrentInfo(4);
+      }
+      else{
+        setCurrentInfo((cur)=>cur-1);
+      } 
+  }
+  
+  const onClickNextButton=()=>{
+      if (currentInfo===4){
+        setCurrentInfo(1);
+      }
+      else{
+        setCurrentInfo((cur)=>cur+1);
+      } 
+  }
     return(
     <Div>
         <Description ref={ref} className={onAbout?"startAnimation":""}>
@@ -160,7 +135,16 @@ export function About(){
           <BoldFont>프론트엔드</BoldFont> 개발자 <BorderBottomGradient><BoldFont>이현지</BoldFont></BorderBottomGradient>입니다.
         </Description>
         <InfoDiv>
-          {renderInfoData()}
+          <Button onClick={onClickPrevButton} style={{left:'-11%'}}>
+            <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
+          </Button>
+            {currentInfo===1?RenderCareer():null}
+            {currentInfo===2?RenderEducation():null}
+            {currentInfo===3?RenderEtc():null}
+            {currentInfo===4?RenderContact():null}
+          <Button onClick={onClickNextButton} style={{right:'-11%'}}>
+            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+          </Button>
         </InfoDiv>
 
         <DownButton location={2}/>

@@ -36,8 +36,7 @@ const CubeSide=styled.div`
     border: solid 1px black;
     display:flex;
     align-items:center;
-    background-color:white;
-    opacity:0.9;
+    background-color:#ffffffe6;
 
     width:400px;
     height:400px;
@@ -101,7 +100,7 @@ export function RotateSkillCube(){
     },[inView])
 
     return (
-    <>
+    <div style={{position:'relative'}}>
     <ClickMessage running={onCubeClick}/>
     <CubeDiv ref={ref} className={(onCube? "startAnimation ":"")+(onCubeClick? "pauseAnimation":"")} 
     onClick={()=>setOnCubeClick(!onCubeClick)}>
@@ -120,6 +119,6 @@ export function RotateSkillCube(){
         </CubeSide>
         <CubeSide></CubeSide>
     </CubeDiv>
-    </>
+    </div>
     );
 }

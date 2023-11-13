@@ -3,24 +3,26 @@ import "../../fonts/font.css";
 
 const swell=keyframes`
   0%, 100% {
-    transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, 0px, 0);
   }
   50% {
-    transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, -15px, 0);
   }
 `
 const MessageDiv=styled.div`
     position: absolute;
-    top:20%;
-    right: 10%;
+    top:-22%;
+    right:-50%;
     text-align:center;
-    animation: ${swell} 1s infinite linear;
     font-family:"SUITE-Regular";
-    @media screen and (min-width:1200px){
-        right:17%;
+    @media screen and (max-width:750px){
+        top:-50%;
+        right:-5%;
     }
 `
-const Message=styled.div`
+const Message=styled.span`
+    animation: ${swell} 0.7s infinite linear;
+    display:inline-block;
 
 `
 const Arrow=styled.img`
@@ -37,9 +39,13 @@ type ClickMessageProps={
 export function ClickMessage(prop:ClickMessageProps){
     return(
         <MessageDiv>
-            <Message>
-            {prop.running? "다시 클릭하면 큐브가 돌아가요!":"큐브를 클릭하면 멈출 수 있어요!"}
-            </Message>
+            <div>
+            {prop.running? 
+            <>다시 <Message>클릭</Message>하면 큐브가 돌아가요!</>
+            :
+            <>큐브를 <Message>클릭</Message>하면 멈출 수 있어요!</>
+            }
+            </div>
             <Arrow src={"/images/skillset/arrow.png"}></Arrow>
         </MessageDiv>
     );

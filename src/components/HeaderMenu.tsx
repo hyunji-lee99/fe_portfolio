@@ -101,7 +101,7 @@ function HeaderMenu() {
     window.scrollTo({left:0,top:3*window.innerHeight,behavior:"smooth"});
   }
   
-  const onClickChat=()=>{
+  const onClickBoard=()=>{
     setRespMenu(false);
     window.scrollTo({left:0,top:4*window.innerHeight,behavior:"smooth"});
   }
@@ -113,7 +113,7 @@ function HeaderMenu() {
           <li onClick={onClickAbout}>ABOUT</li>
           <li onClick={onClickSkill}>SKILL</li>
           <li onClick={onClickProject}>PROJECT</li>
-          <li onClick={onClickChat}>CHAT</li>
+          <li onClick={onClickBoard}>BOARD</li>
         </RespMenuUnderLogo>
         :
         <></>}
@@ -122,7 +122,7 @@ function HeaderMenu() {
             <li onClick={onClickAbout}>ABOUT</li>
             <MenuLi onClick={onClickSkill}>SKILL</MenuLi>
             <li onClick={onClickProject}>PROJECT</li>
-            <MenuLi onClick={onClickChat}>CHAT</MenuLi>
+            <MenuLi onClick={onClickBoard}>BOARD</MenuLi>
           </MenuUl>
         </Menu>
         <ResponsiveMenu onClick={()=>setRespMenu(!respMenu)}>
