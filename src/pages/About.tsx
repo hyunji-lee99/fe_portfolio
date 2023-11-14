@@ -8,6 +8,7 @@ import { RenderEducation } from "../components/About/RenderEducation";
 import { RenderCareer } from "../components/About/RenderCareer";
 import { RenderEtc } from "../components/About/RenderEtc";
 import { RenderContact } from "../components/About/RenderContact";
+import { RenderPrize } from "../components/About/RenderPrize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
@@ -114,7 +115,7 @@ export function About(prop:AboutProps){
     
   const onClickPrevButton=()=>{
       if (currentInfo===1){
-        setCurrentInfo(4);
+        setCurrentInfo(5);
       }
       else{
         setCurrentInfo((cur)=>cur-1);
@@ -122,7 +123,7 @@ export function About(prop:AboutProps){
   }
   
   const onClickNextButton=()=>{
-      if (currentInfo===4){
+      if (currentInfo===5){
         setCurrentInfo(1);
       }
       else{
@@ -142,10 +143,11 @@ export function About(prop:AboutProps){
           <Button onClick={onClickPrevButton} style={{left:'-11%'}}>
             <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
           </Button>
-            {currentInfo===1?RenderCareer():null}
+            {currentInfo===1?RenderContact():null}
             {currentInfo===2?RenderEducation():null}
-            {currentInfo===3?RenderEtc():null}
-            {currentInfo===4?RenderContact():null}
+            {currentInfo===3?RenderCareer():null}
+            {currentInfo===4?RenderPrize():null}
+            {currentInfo===5?RenderEtc():null}
           <Button onClick={onClickNextButton} style={{right:'-11%'}}>
             <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
           </Button>

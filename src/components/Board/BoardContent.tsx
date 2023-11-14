@@ -5,10 +5,9 @@ import "../../fonts/font.css";
 const ContentDiv=styled.div`
     width:100%;
     height:150px;
-    border-radius:10px;
+    /* border-radius:10px; */
     padding: 5% 5%;
     font-family:'SUITE-Regular';
-    /* box-shadow: gray 0px 12px 24px; */
     &:nth-of-type(4n+1){
         background-color:#7FB4E2;
     }

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { DownButton } from "../components/common/DownButton";
+import ProjectList from "../components/Project/ProjectList";
 
 const Div = styled.div`
   width:100vw;
@@ -8,6 +9,7 @@ const Div = styled.div`
   align-items:center;
   justify-content:center;
   position: relative;
+  background-image:linear-gradient(0deg, #ffffff 0%,#7FB4E280 100%);
 `
 type ProjectProps={
   projectRef:React.ForwardedRef<HTMLDivElement|null>;
@@ -17,7 +19,7 @@ type ProjectProps={
 export function Project(prop:ProjectProps){
     return(
     <Div ref={prop.projectRef}>
-        project
+        <ProjectList/>
         <DownButton location={prop.nextRef}/>
     </Div>);
 }

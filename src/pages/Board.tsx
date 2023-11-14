@@ -13,7 +13,7 @@ const Div = styled.div`
   padding:100px 10%;
   align-items:center;
   justify-content:center;
-
+  background-image:linear-gradient(0deg, #ffffff 0%,#7FB4E280 100%);
 `
 
 type BoardProps={

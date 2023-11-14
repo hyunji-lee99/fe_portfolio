@@ -19,8 +19,8 @@ const ContentInput=styled.input`
     font-family:"SUITE-Regular";
     border:none;
     border-bottom-left-radius:25px;
-    border-left:solid 1px black;
-    border-bottom:solid 1px black;
+    /* border-left:solid 1px black; */
+    /* border-bottom:solid 1px black; */
     padding-left:6%;
     &:focus{
         outline:none;
@@ -32,7 +32,7 @@ const NameInput=styled.input`
     /* padding: 0 1%; */
     padding-left:6%;
     border:none;
-    border-left:solid 1px black;
+    /* border-left:solid 1px black; */
     font-family:"SUITE-Regular";
     &:focus{
         outline:none;
@@ -50,8 +50,8 @@ const SubmitButton=styled.button`
     height:100%;
     border:none;
     border-bottom-right-radius:25px;
-    border-right: solid 1px black;
-    border-bottom: solid 1px black;
+    /* border-right: solid 1px black; */
+    /* border-bottom: solid 1px black; */
     color:white;
     background-color: #87CEEB;
     @media screen and (max-width:700px){

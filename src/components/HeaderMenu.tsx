@@ -17,7 +17,8 @@ const HeaderDiv = styled.div`
     align-items:center;
     justify-content:space-between;
     font-family:'jejudoldam';
-    background-color:white;
+    /* background-color:white; */
+    backdrop-filter:blur(7px);
     @media screen and (max-width:900px){
       padding:0;
     }
