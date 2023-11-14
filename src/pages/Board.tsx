@@ -13,11 +13,17 @@ const Div = styled.div`
   padding:100px 10%;
   align-items:center;
   justify-content:center;
+
 `
-export function Board(){
+
+type BoardProps={
+  boardRef:React.ForwardedRef<HTMLDivElement|null>;
+}
+
+export function Board(prop:BoardProps){
   const [onConfeti,setOnConfetti]=useState(true);
     return(
-    <Div>
+    <Div ref={prop.boardRef}>
       {onConfeti && 
       <ConfettiExplosion 
         onComplete={()=>setOnConfetti(false)} 

@@ -3,7 +3,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import styled from "styled-components";
 import '../fonts/font.css';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import "../fonts/font.css";
 
 const HeaderDiv = styled.div`
@@ -78,32 +78,46 @@ const RespMenuUnderLogo=styled.ul`
     }
 `
 
+type HeaderMenuProps={
+  menuRef:React.ForwardedRef<HTMLDivElement>[];
+}
 
-function HeaderMenu() {
+const HeaderMenu=(prop:HeaderMenuProps)=>{
   const [respMenu, setRespMenu] = useState(false);
+  {console.log(prop.menuRef)};
   const onClickIntro=()=>{
     setRespMenu(false);
-    window.scrollTo({left:0,top:0,behavior:"smooth"});
+    if (typeof prop.menuRef[0]!=="function"){
+      console.log(prop.menuRef[0]?.current?.scrollIntoView({behavior:"smooth"}));
+    }
   }
   
   const onClickAbout=()=>{
     setRespMenu(false);
-    window.scrollTo({left:0,top:window.innerHeight,behavior:"smooth"});
+    if (typeof prop.menuRef[1]!=="function"){
+      console.log(prop.menuRef[1]?.current?.scrollIntoView({behavior:"smooth"}));
+    }
   }
   
   const onClickSkill=()=>{
     setRespMenu(false);
-    window.scrollTo({left:0,top:2*window.innerHeight,behavior:"smooth"});
+    if (typeof prop.menuRef[2]!=="function"){
+      console.log(prop.menuRef[2]?.current?.scrollIntoView({behavior:"smooth"}));
+    }
   }
   
   const onClickProject=()=>{
     setRespMenu(false);
-    window.scrollTo({left:0,top:3*window.innerHeight,behavior:"smooth"});
+    if (typeof prop.menuRef[3]!=="function"){
+      console.log(prop.menuRef[3]?.current?.scrollIntoView({behavior:"smooth"}));
+    }
   }
   
   const onClickBoard=()=>{
     setRespMenu(false);
-    window.scrollTo({left:0,top:4*window.innerHeight,behavior:"smooth"});
+    if (typeof prop.menuRef[4]!=="function"){
+      console.log(prop.menuRef[4]?.current?.scrollIntoView({behavior:"smooth"}));
+    }
   }
     return (
       <HeaderDiv>
@@ -133,5 +147,5 @@ function HeaderMenu() {
     );
   }
   
-  export default HeaderMenu;
+  export default forwardRef(HeaderMenu);
   

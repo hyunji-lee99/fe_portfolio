@@ -62,12 +62,15 @@ const AnimationEffectTwo = styled.div`
 `
 
 type DownButtonProps={
-    location:number;
+    location:React.ForwardedRef<HTMLDivElement>;
 }
 
-export function DownButton(location:DownButtonProps){
+export function DownButton(prop:DownButtonProps){
     const onDownButton=()=>{
-        window.scrollTo({left:0, top:location.location*window.innerHeight, behavior:'smooth'})
+        if (typeof prop.location!=="function"){
+            prop.location?.current?.scrollIntoView({behavior:"smooth"});
+        }
+        // window.scrollTo({left:0, top:location.location*window.innerHeight, behavior:'smooth'})
     }
     return(
         <ButtonDiv onClick={onDownButton}>

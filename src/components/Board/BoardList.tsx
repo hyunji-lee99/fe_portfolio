@@ -10,10 +10,15 @@ const BoardDiv=styled.div`
     /* grid-template-rows:repeat(3, 1fr); */
     grid-gap: 4%;
     padding: 5% 5%;
-    border:solid 1px black;
+    /* border:solid 1px black; */
     width: 100%;
     height:90%;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
     overflow:scroll;
+    border:solid 1px black;
+    border-bottom:none;
+    background-color: white;
 
 `
 

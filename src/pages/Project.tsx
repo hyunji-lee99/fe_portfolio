@@ -9,10 +9,15 @@ const Div = styled.div`
   justify-content:center;
   position: relative;
 `
+type ProjectProps={
+  projectRef:React.ForwardedRef<HTMLDivElement|null>;
+  nextRef:React.ForwardedRef<HTMLDivElement|null>;
+}
 
-export function Project(){
-    return(<Div>
+export function Project(prop:ProjectProps){
+    return(
+    <Div ref={prop.projectRef}>
         project
-        <DownButton location={4}/>
+        <DownButton location={prop.nextRef}/>
     </Div>);
 }

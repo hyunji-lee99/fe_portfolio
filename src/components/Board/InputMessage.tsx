@@ -1,58 +1,62 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import ConfettiExplosion from 'react-confetti-explosion';
 import styled from 'styled-components';
 import { postMessage } from '../../firebase';
 import "../../fonts/font.css";
 
 const InputForm=styled.form`
     width: 100%;
-    height:50px;
+    height:80px;
     display:flex;
-    margin-top:1%;
     /* justify-content:space-between; */
     
-
 `
 const ContentInput=styled.input`
-    width:70%;
+    width:100%;
     height:100%;
-    padding: 0 1%;
-    border:none;
+    /* padding: 0 1%; */
     font-family:"SUITE-Regular";
-    background-image:url("/images/board/message_bubble.png");
-    background-repeat: no-repeat;
-    background-position: 2% center;
-    background-size:30px;
-    padding-left:50px;
+    border:none;
+    border-bottom-left-radius:25px;
+    border-left:solid 1px black;
+    border-bottom:solid 1px black;
+    padding-left:6%;
     &:focus{
         outline:none;
     }
 `
 const NameInput=styled.input`
-    width:20%;
+    width:100%;
     height:100%;
-    padding: 0 1%;
+    /* padding: 0 1%; */
+    padding-left:6%;
     border:none;
+    border-left:solid 1px black;
     font-family:"SUITE-Regular";
-    background-image:url("/images/board/write.png");
-    background-repeat: no-repeat;
-    background-position: 2% center;
-    background-size:30px;
-    padding-left:40px;
-
-
     &:focus{
         outline:none;
     }
 `
+const InputDiv=styled.div`
+    width:100%;
+    height: 80px;
+    display:flex;
+    flex-direction:column;
+
+`
 const SubmitButton=styled.button`
-    width:10%;
+    width:5%;
     height:100%;
     border:none;
+    border-bottom-right-radius:25px;
+    border-right: solid 1px black;
+    border-bottom: solid 1px black;
     color:white;
-    background-image: linear-gradient(90deg, #7FB4E2 0%,#aad4e4 100%);
+    background-color: #87CEEB;
+    @media screen and (max-width:700px){
+        width:15%;
+    }
 `
 const Icon=styled.img`
     width:50px;
@@ -93,8 +97,10 @@ export function InputMessage(prop:InputMessageProps) {
     }
     return (
         <InputForm onSubmit={onSubmitMessage}>
-            <NameInput onChange={onChangeAuthor} value={inputAuthor} placeholder="이름 또는 별명을 입력해주세요!"/>
-            <ContentInput onChange={onChangeContent} value={inputContent} placeholder="하고 싶은 말을 입력해주세요!"/>
+            <InputDiv>
+                <NameInput onChange={onChangeAuthor} value={inputAuthor} placeholder="이름 또는 별명을 입력해주세요!"/>
+                <ContentInput onChange={onChangeContent} value={inputContent} placeholder="하고 싶은 말을 입력해주세요!"/>
+            </InputDiv>
             <SubmitButton type='submit'>
                 <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
             </SubmitButton>

@@ -13,10 +13,15 @@ const Div = styled.div`
   position: relative;
 `
 
-export function Skill(){
+type SkillProps={
+  skillRef:React.ForwardedRef<HTMLDivElement|null>;
+  nextRef:React.ForwardedRef<HTMLDivElement|null>;
+}
+
+export function Skill(prop:SkillProps){
     return(
-    <Div>
+    <Div ref={prop.skillRef}>
         <RotateSkillCube></RotateSkillCube>
-        <DownButton location={3}/>
+        <DownButton location={prop.nextRef}/>
     </Div>);
 }

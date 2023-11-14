@@ -92,8 +92,12 @@ const Button=styled.button`
     font-size:0.8rem;
   }
 `
+type AboutProps={
+  aboutRef:React.ForwardedRef<HTMLDivElement|null>;
+  nextRef:React.ForwardedRef<HTMLDivElement|null>;
+}
 
-export function About(){
+export function About(prop:AboutProps){
     const {ref, inView}=useInView();
     const [onAbout, setOnAbout]=useState(true);
     const [currentInfo, setCurrentInfo]=useState(1);
@@ -126,7 +130,7 @@ export function About(){
       } 
   }
     return(
-    <Div>
+    <Div ref={prop.aboutRef}>
         <Description ref={ref} className={onAbout?"startAnimation":""}>
           <BoldFont>성취하며 느낀 행복</BoldFont>을 오랫동안 기억하고,
           <br/>
@@ -147,7 +151,7 @@ export function About(){
           </Button>
         </InfoDiv>
 
-        <DownButton location={2}/>
+        <DownButton location={prop.nextRef}/>
     </Div>
     );
 }
