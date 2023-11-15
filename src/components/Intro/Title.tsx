@@ -2,14 +2,6 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styled, { keyframes } from "styled-components";
 
-const SlideDownTitle=keyframes`
-  0%{
-    transform: translateY(-100%);
-  }
-  100%{
-    transform: translateY(0px);
-  }
-`
 const TitleDiv=styled.div`
   position:absolute;
   white-space:nowrap;

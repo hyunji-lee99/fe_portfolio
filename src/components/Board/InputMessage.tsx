@@ -12,6 +12,9 @@ const InputForm=styled.form`
     justify-content:space-between;
     position:relative;
     /* justify-content:space-between; */
+    @media screen and (max-width:700px){
+        height:60px;
+    }
     
 `
 const ContentInput=styled.input`
@@ -39,7 +42,7 @@ const NameInput=styled.input`
 `
 const InputDiv=styled.div`
     width:90%;
-    height: 80px;
+    height: 100%;
     display:flex;
     flex-direction:column;
     @media screen and (max-width:700px){

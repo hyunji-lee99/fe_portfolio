@@ -24,7 +24,6 @@ const HeaderDiv = styled.div`
     }
     @media screen and (max-width:900px){
       padding:0;
-      position:sticky;
     }
     @media screen and (min-width:1200px){
       padding: 0 10%;

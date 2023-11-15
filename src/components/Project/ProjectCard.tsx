@@ -38,7 +38,7 @@ const SlideLeftInfo=keyframes`
 const CardInfo=styled.div`
     margin-right:10%;
     &.startanimation{
-        animation: ${SlideDownInfo} 0.3s linear;
+        animation: ${SlideDownInfo} 0.3s linear
     }
     @media screen and (max-width:900px){
         margin-right:0;
