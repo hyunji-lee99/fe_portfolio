@@ -4,15 +4,24 @@ import ProjectCard from './ProjectCard';
 import { ProjectData } from './ProjectData';
 
 const ProjectListDiv=styled.div`
-    width:80%;
-    height:70%;
+    width:100%;
+    height:100%;
 `
+type ProjectListProp={
+    index:number;
+}
 
-
-function ProjectList() {
+function ProjectList(prop:ProjectListProp) {
     return (
         <ProjectListDiv>
-            <ProjectCard title={ProjectData[0].title} images={ProjectData[0].images} summary={ProjectData[0].summary}/>
+            <ProjectCard title={ProjectData[prop.index].title}
+                         member={ProjectData[prop.index].member}
+                         images={ProjectData[prop.index].images}
+                         github={ProjectData[prop.index].github}
+                         hosturl={ProjectData[prop.index].hosturl}
+                         introduce={ProjectData[prop.index].introduce}
+                         implementaion={ProjectData[prop.index].implementation}
+                         skillstack={ProjectData[prop.index].skillstack}/>
         </ProjectListDiv>
     );
 }

@@ -15,7 +15,7 @@ const BoardDiv=styled.div`
     border-top-right-radius:25px;
     overflow:scroll;
     background-color: white;
-    box-shadow:20px 20px 20px 1px rgba(0, 0, 0, 0.08)
+    z-index:5;
 
 `
 

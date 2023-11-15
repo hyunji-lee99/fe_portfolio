@@ -9,6 +9,7 @@ const InputForm=styled.form`
     width: 100%;
     height:80px;
     display:flex;
+    z-index:5;
     /* justify-content:space-between; */
     
 `
@@ -58,11 +59,7 @@ const SubmitButton=styled.button`
         width:15%;
     }
 `
-const Icon=styled.img`
-    width:50px;
-    height:50px;
 
-`
 type InputMessageProps={
     confetti:Function
 }

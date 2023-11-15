@@ -1,4 +1,4 @@
-import { faArrowAltCircleLeft, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React,{useEffect,useRef,useState} from 'react';
 import styled from 'styled-components';
@@ -8,26 +8,38 @@ const SliderDiv=styled.div`
     height:300px;
     overflow:hidden;
     position:relative;
+    margin: 0 auto;
+    @media screen and (max-width:700px){
+        width:300px;
+        height:200px;
+        
+    }
 `
 const SliderWrapper=styled.div`
     display:flex;
-    width:400px;
-    height:300px;
+    width:100%;
+    height:100%;
 `
 const Image=styled.img`
     width:400px;
     height:300px;
     object-fit:contain;
+    @media screen and (max-width:700px){
+        width:300px;
+        height:200px;
+        
+    }
 `
 const ImageDiv=styled.div`
     display:flex; */
     align-items:center;
     justify-content:center;
-    width:400px;
-    height:300px;
+    width:100%;
+    height:100%;
     background-color:white;
 `
 const ButtonDiv=styled.div`
+    width:100%;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -40,7 +52,10 @@ const Button=styled.button`
     height:25px;
     border:none;
     border-radius:50%;
-    background-color:#87CEEB;
+    background-color:gray;
+    &:hover{
+        background-color:black;
+    }    
 
 `
 
@@ -51,10 +66,12 @@ type ProjectImageSliderProp={
 function ProjectImageSlider(prop:ProjectImageSliderProp) {
     const SlideRef=useRef<HTMLDivElement>(null);
     const [index, setIndex]=useState(0);
-    const slideRange=400*index;
+    // const slideRange=400*index;
+    
 
     useEffect(()=>{
         if(SlideRef.current?.style!=null){
+            const slideRange=SlideRef.current.offsetWidth*index;
             SlideRef.current.style.transition = "all 0.5s ease-in-out";
             SlideRef.current.style.transform=`translateX(-${slideRange}px)`
         }

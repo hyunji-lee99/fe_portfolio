@@ -18,7 +18,7 @@ const HeaderDiv = styled.div`
     justify-content:space-between;
     font-family:'jejudoldam';
     /* background-color:white; */
-    backdrop-filter:blur(7px);
+    /* backdrop-filter:blur(3px); */
     @media screen and (max-width:900px){
       padding:0;
     }
@@ -85,7 +85,6 @@ type HeaderMenuProps={
 
 const HeaderMenu=(prop:HeaderMenuProps)=>{
   const [respMenu, setRespMenu] = useState(false);
-  {console.log(prop.menuRef)};
   const onClickIntro=()=>{
     setRespMenu(false);
     if (typeof prop.menuRef[0]!=="function"){

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import styled, {keyframes} from "styled-components";
 
 const Ocean = styled.div`
@@ -33,7 +35,8 @@ const Wave = styled.div`
   top: -198px;
   width: 100%;
   height: 198px;
-  -webkit-animation: ${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  &.startAnimation{
+    -webkit-animation: ${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
           animation: ${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
 
@@ -43,14 +46,26 @@ const Wave = styled.div`
     animation: ${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, ${swell} 7s ease -1.25s infinite;
     opacity: 1;
   }
+  }
 `
 
 export function WaveBackground(){
+  const {ref, inView}=useInView();
+  const [onWave, setOnWave]=useState(true);
+  useEffect(()=>{
+    if (inView){
+      setOnWave(true);
+    }
+    else{
+      setOnWave(false);
+    }
+    
+  },[inView])
   
     return(
-        <Ocean>
-            <Wave/>
-            <Wave/>
+        <Ocean ref={ref}>
+            <Wave className={onWave?"startAnimation":""}/>
+            <Wave className={onWave?"startAnimation":""}/>
         </Ocean>
 
     );
