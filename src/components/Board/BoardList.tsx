@@ -41,9 +41,9 @@ export function BoardList() {
     },[])
 
     function RenderBoardContent(){
-        const ReturnRenderBoardContentboard=board?.map((data)=>{
+        const ReturnRenderBoardContentboard=board?.map((data,id)=>{
             return(
-            <BoardContent author={data.author} content={data.content}></BoardContent>
+            <BoardContent key={id} author={data.author} content={data.content}></BoardContent>
             );
         })
         return ReturnRenderBoardContentboard;

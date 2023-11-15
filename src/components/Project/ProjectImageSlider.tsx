@@ -100,9 +100,9 @@ function ProjectImageSlider(prop:ProjectImageSliderProp) {
     }
 
     const RenderImage=()=>{
-        const ReturnRenderImage=prop.imageList.map((image)=>{
+        const ReturnRenderImage=prop.imageList.map((image,id)=>{
             return(
-                <ImageDiv>
+                <ImageDiv key={id}>
                     <Image src={image}></Image>
                 </ImageDiv>
             )

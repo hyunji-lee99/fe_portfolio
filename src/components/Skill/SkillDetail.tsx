@@ -72,9 +72,9 @@ export function SkillDetail(subject:SkillDetailProps){
         Data=EtcSkillSet;
     }
     const ReturnRenderData=Data.map(
-        (data)=>{
+        (data,id)=>{
           return (
-            <SkillLogoAndName>
+            <SkillLogoAndName key={id}>
                 <SkillLogo src={data.img}></SkillLogo>
                 <SkillName>{data.title}</SkillName>
             </SkillLogoAndName>
