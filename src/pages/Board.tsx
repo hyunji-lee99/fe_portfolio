@@ -1,9 +1,10 @@
-import { useState } from "react";
-import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
+
 import { styled } from "styled-components";
 import { BoardList } from "../components/Board/BoardList";
 import { InputMessage } from "../components/Board/InputMessage";
 import Snowfall from "react-snowfall";
+import { useInView } from "react-intersection-observer";
+import { useEffect, useState } from "react";
 
 
 const Div = styled.div`
@@ -17,21 +18,39 @@ const Div = styled.div`
   justify-content:center;
   background-image:linear-gradient(0deg, #ffffff 0%,#7FB4E280 100%);
 `
+const BoardWrapper=styled.div`
+  width:100%;
+  height:100%;
+  z-index:2;
+  padding: 5% 5%;
+  background-color:white;
+  border-radius:10px;
 
+`
 type BoardProps={
   boardRef:React.ForwardedRef<HTMLDivElement|null>;
 }
 
 export function Board(prop:BoardProps){
-  const [onConfeti,setOnConfetti]=useState(true);
+    const {ref, inView}=useInView();
+    const [onSnow, setOnSnow]=useState(false);
+    useEffect(()=>{
+      if (inView){
+        setOnSnow(true)
+      }
+      else {
+        setOnSnow(false)
+      }
+    },[inView])
+
     return(
     <Div ref={prop.boardRef}>
-      <Snowfall color={"#ffffff"} snowflakeCount={1500} speed={[1,1]} wind={[-1,1]}/>
-      {/* {onConfeti && 
-      <ConfettiExplosion 
-        onComplete={()=>setOnConfetti(false)} 
-        colors={['#7FB4E2','#6F3A00','#FFECCC','#8B7356','#87ceeb']}/>} */}
-      <BoardList/>
-      <InputMessage confetti={setOnConfetti}/>
+      {/* 뷰 안에 요소가 들어오면 animation 실행  */}
+      <div ref={ref}></div>
+      {onSnow?<Snowfall color={"#ffffff"} snowflakeCount={1500} speed={[1,1]} wind={[-1,1]}/>:null}
+      <BoardWrapper>
+        <BoardList/>
+        <InputMessage/>
+      </BoardWrapper>
     </Div>);
 }

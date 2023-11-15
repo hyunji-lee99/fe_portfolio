@@ -12,7 +12,6 @@ const SliderDiv=styled.div`
     @media screen and (max-width:700px){
         width:300px;
         height:200px;
-        
     }
 `
 const SliderWrapper=styled.div`
@@ -27,11 +26,10 @@ const Image=styled.img`
     @media screen and (max-width:700px){
         width:300px;
         height:200px;
-        
     }
 `
 const ImageDiv=styled.div`
-    display:flex; */
+    display:flex; 
     align-items:center;
     justify-content:center;
     width:100%;
@@ -66,14 +64,20 @@ type ProjectImageSliderProp={
 function ProjectImageSlider(prop:ProjectImageSliderProp) {
     const SlideRef=useRef<HTMLDivElement>(null);
     const [index, setIndex]=useState(0);
-    // const slideRange=400*index;
-    
+    const mutationObserver=new MutationObserver(async ()=>{
+        setIndex(0);
+    })
 
     useEffect(()=>{
-        if(SlideRef.current?.style!=null){
+        if(SlideRef.current){
             const slideRange=SlideRef.current.offsetWidth*index;
             SlideRef.current.style.transition = "all 0.5s ease-in-out";
             SlideRef.current.style.transform=`translateX(-${slideRange}px)`
+            
+            mutationObserver.observe(SlideRef.current, {
+                childList:true,
+                subtree:true
+            })
         }
     },[index])
 

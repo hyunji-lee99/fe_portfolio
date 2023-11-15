@@ -17,10 +17,10 @@ const HeaderDiv = styled.div`
     align-items:center;
     justify-content:space-between;
     font-family:'jejudoldam';
-    /* background-color:white; */
-    /* backdrop-filter:blur(3px); */
+    backdrop-filter:blur(3px);
     @media screen and (max-width:900px){
       padding:0;
+      position:sticky;
     }
     @media screen and (min-width:1200px){
       padding: 0 10%;
@@ -55,6 +55,7 @@ const MenuLi=styled.li`
 const ResponsiveMenu=styled.div`
   font-size:1.5rem;
   position: absolute;
+  
   right:5%;
   @media screen and (min-width:900px){
       display:none;
@@ -64,15 +65,16 @@ const ResponsiveMenu=styled.div`
 
 const RespMenuUnderLogo=styled.ul`
     list-style:none;
-    background-color:white;
     position:absolute;
     display:flex;
     flex-direction:column;
     justify-content:space-around;
-    width:100vw;
+    width:100%;
     height:200%;
     text-align:center;
     top:100px;
+    z-index:3;
+    /* backdrop-filter:blur(3px); */
     font-family:"SUITE-Bold";
     @media screen and (min-width:900px){
       display:none;
@@ -88,35 +90,35 @@ const HeaderMenu=(prop:HeaderMenuProps)=>{
   const onClickIntro=()=>{
     setRespMenu(false);
     if (typeof prop.menuRef[0]!=="function"){
-      console.log(prop.menuRef[0]?.current?.scrollIntoView({behavior:"smooth"}));
+      prop.menuRef[0]?.current?.scrollIntoView({behavior:"smooth"});
     }
   }
   
   const onClickAbout=()=>{
     setRespMenu(false);
     if (typeof prop.menuRef[1]!=="function"){
-      console.log(prop.menuRef[1]?.current?.scrollIntoView({behavior:"smooth"}));
+      prop.menuRef[1]?.current?.scrollIntoView({behavior:"smooth"});
     }
   }
   
   const onClickSkill=()=>{
     setRespMenu(false);
     if (typeof prop.menuRef[2]!=="function"){
-      console.log(prop.menuRef[2]?.current?.scrollIntoView({behavior:"smooth"}));
+      prop.menuRef[2]?.current?.scrollIntoView({behavior:"smooth"});
     }
   }
   
   const onClickProject=()=>{
     setRespMenu(false);
     if (typeof prop.menuRef[3]!=="function"){
-      console.log(prop.menuRef[3]?.current?.scrollIntoView({behavior:"smooth"}));
+      prop.menuRef[3]?.current?.scrollIntoView({behavior:"smooth"});
     }
   }
   
   const onClickBoard=()=>{
     setRespMenu(false);
     if (typeof prop.menuRef[4]!=="function"){
-      console.log(prop.menuRef[4]?.current?.scrollIntoView({behavior:"smooth"}));
+      prop.menuRef[4]?.current?.scrollIntoView({behavior:"smooth"});
     }
   }
     return (

@@ -45,7 +45,7 @@ const translateTitleMask=(move:number)=>keyframes`
 `
 interface TitleProps{
   height:number;
-  startAnimation:boolean;
+  startanimation:boolean;
 }
 
 const TextBackgroundOnMouseMove=styled.div<TitleProps>`
@@ -56,7 +56,7 @@ const TextBackgroundOnMouseMove=styled.div<TitleProps>`
   top:0;
   overflow:hidden;
   -webkit-text-stroke: 1px black;
-  animation: ${(props)=>props.startAnimation? translateBackgroundMask(props.height) :null} 5s linear infinite;
+  animation: ${(props)=>props.startanimation? translateBackgroundMask(props.height) :null} 5s linear infinite;
   @media screen and (max-width:900px){
       height:50px;
     }
@@ -64,7 +64,7 @@ const TextBackgroundOnMouseMove=styled.div<TitleProps>`
 
 const TitleMask = styled.h1<TitleProps>`
   font-size:7.9rem;
-  animation: ${(props)=>props.startAnimation? translateTitleMask(-props.height) :null} 5s linear infinite;
+  animation: ${(props)=>props.startanimation? translateTitleMask(-props.height) :null} 5s linear infinite;
   @media screen and (max-width:900px){
       font-size:5rem;
     }
@@ -95,8 +95,8 @@ export function Title(){
     return(
         <TitleDiv ref={ref} className={onTitle?"startAnimation":""} id="title">
             <TitleUnmask>Frontend<br/>Portfolio</TitleUnmask>
-            <TextBackgroundOnMouseMove height={PosY} startAnimation={onTitle}>
-                <TitleMask height={PosY} startAnimation={onTitle}> Frontend<br/>Portfolio</TitleMask>
+            <TextBackgroundOnMouseMove height={PosY} startanimation={onTitle}>
+                <TitleMask height={PosY} startanimation={onTitle}> Frontend<br/>Portfolio</TitleMask>
             </TextBackgroundOnMouseMove>
         </TitleDiv>
 

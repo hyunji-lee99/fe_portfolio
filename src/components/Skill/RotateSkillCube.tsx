@@ -17,7 +17,7 @@ const CubeDiv=styled.div`
     margin:0 auto;
     transform-style: preserve-3d;
 
-    &.startAnimation{
+    &.startanimation{
         animation : ${Spin} 5s infinite linear;
     }
 
@@ -102,7 +102,7 @@ export function RotateSkillCube(){
     return (
     <div style={{position:'relative'}}>
     <ClickMessage running={onCubeClick}/>
-    <CubeDiv ref={ref} className={(onCube? "startAnimation ":"")+(onCubeClick? "pauseAnimation":"")} 
+    <CubeDiv ref={ref} className={(onCube? "startanimation ":"")+(onCubeClick? "pauseAnimation":"")} 
     onClick={()=>setOnCubeClick(!onCubeClick)}>
         <CubeSide></CubeSide>
         <CubeSide>

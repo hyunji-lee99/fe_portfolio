@@ -9,20 +9,18 @@ const InputForm=styled.form`
     width: 100%;
     height:80px;
     display:flex;
-    z-index:5;
+    justify-content:space-between;
+    position:relative;
     /* justify-content:space-between; */
     
 `
 const ContentInput=styled.input`
     width:100%;
     height:100%;
-    /* padding: 0 1%; */
+    padding-left:1%;
+    border: none;
+    border-bottom: solid 1px gray;
     font-family:"SUITE-Regular";
-    border:none;
-    border-bottom-left-radius:25px;
-    /* border-left:solid 1px black; */
-    /* border-bottom:solid 1px black; */
-    padding-left:6%;
     &:focus{
         outline:none;
     }
@@ -30,29 +28,30 @@ const ContentInput=styled.input`
 const NameInput=styled.input`
     width:100%;
     height:100%;
-    /* padding: 0 1%; */
-    padding-left:6%;
+    padding-left:1%;
+    margin-bottom:5px;
     border:none;
-    /* border-left:solid 1px black; */
+    border-bottom: solid 1px gray;
     font-family:"SUITE-Regular";
     &:focus{
         outline:none;
     }
 `
 const InputDiv=styled.div`
-    width:100%;
+    width:90%;
     height: 80px;
     display:flex;
     flex-direction:column;
+    @media screen and (max-width:700px){
+        width:80%;
+    }
 
 `
 const SubmitButton=styled.button`
     width:5%;
     height:100%;
     border:none;
-    border-bottom-right-radius:25px;
-    /* border-right: solid 1px black; */
-    /* border-bottom: solid 1px black; */
+    border-radius: 5px;
     color:white;
     background-color: #87CEEB;
     @media screen and (max-width:700px){
@@ -60,12 +59,9 @@ const SubmitButton=styled.button`
     }
 `
 
-type InputMessageProps={
-    confetti:Function
-}
     
 
-export function InputMessage(prop:InputMessageProps) {
+export function InputMessage() {
     const [inputAuthor, setInputAuthor]=useState('');
     const [inputContent, setInputContent]=useState('');
 
@@ -77,7 +73,7 @@ export function InputMessage(prop:InputMessageProps) {
     }
     const onSubmitMessage=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        if (inputAuthor!='' && inputContent!=''){
+        if (inputAuthor!=='' && inputContent!==''){
             postMessage({
                 author:inputAuthor,
                 content:inputContent,
@@ -85,7 +81,6 @@ export function InputMessage(prop:InputMessageProps) {
             });
             setInputAuthor('');
             setInputContent('');
-            prop.confetti(true);
         }
         else{
             alert('내용을 입력해주세요!')

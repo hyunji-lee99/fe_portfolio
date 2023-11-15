@@ -8,14 +8,13 @@ const BoardDiv=styled.div`
     display:grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 4%;
-    padding: 5% 5%;
     width: 100%;
     height:90%;
-    border-top-left-radius:25px;
-    border-top-right-radius:25px;
     overflow:scroll;
     background-color: white;
-    z-index:5;
+    @media screen and (max-width:500px){
+        grid-template-columns: 1fr;
+    }
 
 `
 

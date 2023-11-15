@@ -4,10 +4,9 @@ export const Info=styled.div`
   width:100%;
   height:100%;
   margin: 10px 0;
+  flex-shrink:0;
   padding: 10% 10%;
-  /* position:absolute; */
-  background-color:white;
-  box-shadow: rgba(149, 160, 165, 0.2) 0px 8px 24px;
+  background-color:#7FB4E226;
   overflow:scroll;
   @media screen and (max-width:900px){
     padding: 6% 6%;

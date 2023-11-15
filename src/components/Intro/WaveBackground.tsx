@@ -35,7 +35,7 @@ const Wave = styled.div`
   top: -198px;
   width: 100%;
   height: 198px;
-  &.startAnimation{
+  &.startanimation{
     -webkit-animation: ${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
           animation: ${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
@@ -64,8 +64,8 @@ export function WaveBackground(){
   
     return(
         <Ocean ref={ref}>
-            <Wave className={onWave?"startAnimation":""}/>
-            <Wave className={onWave?"startAnimation":""}/>
+            <Wave className={onWave?"startanimation":""}/>
+            <Wave className={onWave?"startanimation":""}/>
         </Ocean>
 
     );
