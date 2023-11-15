@@ -18,6 +18,10 @@ const HeaderDiv = styled.div`
     justify-content:space-between;
     font-family:'jejudoldam';
     backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+    &.responsive{
+      background-color:white;
+    }
     @media screen and (max-width:900px){
       padding:0;
       position:sticky;
@@ -74,7 +78,7 @@ const RespMenuUnderLogo=styled.ul`
     text-align:center;
     top:100px;
     z-index:3;
-    /* backdrop-filter:blur(3px); */
+    background-color:white;
     font-family:"SUITE-Bold";
     @media screen and (min-width:900px){
       display:none;
@@ -122,7 +126,7 @@ const HeaderMenu=(prop:HeaderMenuProps)=>{
     }
   }
     return (
-      <HeaderDiv>
+      <HeaderDiv className={respMenu?"responsive":""}>
         <Logo onClick={onClickIntro}>HYUNJI</Logo>
         {respMenu?
         <RespMenuUnderLogo>
