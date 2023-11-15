@@ -23,7 +23,7 @@ const BoardWrapper=styled.div`
   height:100%;
   z-index:2;
   padding: 5% 5%;
-  background-color:white;
+  background-color:#ffffff80;
   border-radius:10px;
 
 `

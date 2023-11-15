@@ -11,7 +11,6 @@ const BoardDiv=styled.div`
     width: 100%;
     height:90%;
     overflow:scroll;
-    background-color: white;
     @media screen and (max-width:500px){
         grid-template-columns: 1fr;
     }

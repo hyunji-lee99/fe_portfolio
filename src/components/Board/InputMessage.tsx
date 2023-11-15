@@ -22,7 +22,10 @@ const ContentInput=styled.input`
     height:100%;
     padding-left:1%;
     border: none;
+    border-radius:0;
+    background-color:transparent;
     border-bottom: solid 1px gray;
+    -webkit-appearance:none;
     font-family:"SUITE-Regular";
     &:focus{
         outline:none;
@@ -34,8 +37,11 @@ const NameInput=styled.input`
     padding-left:1%;
     margin-bottom:5px;
     border:none;
+    border-radius:0;
+    background-color:transparent;
     border-bottom: solid 1px gray;
     font-family:"SUITE-Regular";
+    -webkit-appearance:none;
     &:focus{
         outline:none;
     }
