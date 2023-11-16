@@ -9,6 +9,7 @@ const InputForm=styled.form`
     width: 100%;
     height:80px;
     display:flex;
+    margin-top:5%;
     justify-content:space-between;
     position:relative;
     /* justify-content:space-between; */
@@ -62,7 +63,7 @@ const SubmitButton=styled.button`
     border:none;
     border-radius: 5px;
     color:white;
-    background-color: #87CEEB;
+    background-color: gray;
     @media screen and (max-width:700px){
         width:15%;
     }

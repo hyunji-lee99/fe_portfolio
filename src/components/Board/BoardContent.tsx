@@ -4,7 +4,8 @@ import "../../fonts/font.css";
 
 const ContentDiv=styled.div`
     width:100%;
-    height:150px;
+    color:#414141;
+    /* height:150px; */
     border-radius:10px;
     display:flex;
     flex-direction:column;
@@ -28,7 +29,7 @@ const ContentDiv=styled.div`
 const Author=styled.div`
     width:90%;
     padding-bottom:2%;
-    border-bottom: solid 1.5px black;
+    border-bottom: solid 1.5px #414141;
     font-family:'SUITE-Bold';
 `
 const Message=styled.div`
@@ -36,7 +37,6 @@ const Message=styled.div`
     padding-top:2%;
     width:90%;
     height:80%;
-
 `
 type BoardContentProps={
     author:string,
