@@ -1,3 +1,4 @@
-2023.11.08~ 개발중입니다👩🏻‍💻🛠
+2023.11.08  개발 시작
+2023.11.16  1차 개발 완료 후 코드 리팩토링 중입니다👩🏻‍💻🛠
 
-hosting : https://fe-portfolio-1bd36.web.app/
+hosting : https://1eehyunji.com/
