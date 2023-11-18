@@ -13,13 +13,17 @@ const Div = styled.div`
   justify-content:center;
   position: relative;
 `
+type IntroProps={
+  introRef:React.ForwardedRef<HTMLDivElement>;
+  nextRef:React.ForwardedRef<HTMLDivElement|null>;
+}
 
-function Intro() {
+function Intro(prop:IntroProps){
   return (
-    <Div>
+    <Div ref={prop.introRef}>
       <Title/>
       <WaveBackground/>
-      <DownButton location={1}/>
+      <DownButton location={prop.nextRef}/>
     </Div>
   );
 }

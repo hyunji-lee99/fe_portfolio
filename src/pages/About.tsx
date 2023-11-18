@@ -1,9 +1,16 @@
-import { keyframes, styled } from "styled-components";
-import { DownButton } from "../components/common/DownButton";
-import '../fonts/font.css';
-import { useInView } from 'react-intersection-observer';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { styled } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
+import { DownButton } from "../components/common/DownButton";
+import { RenderEducation } from "../components/About/RenderEducation";
+import { RenderCareer } from "../components/About/RenderCareer";
+import { RenderEtc } from "../components/About/RenderEtc";
+import { RenderContact } from "../components/About/RenderContact";
+import { RenderPrize } from "../components/About/RenderPrize";
+import { Descriptions } from "../components/About/Descriptions";
+import '../fonts/font.css';
 
 const Div = styled.div`
   width:100vw;
@@ -16,150 +23,112 @@ const Div = styled.div`
   position: relative;
   @media screen and (max-width:900px){
     flex-direction:column;
+    justify-content:center;
   }
-`
-
-const SlideRightDescription=keyframes`
-  0%{
-    transform: translateX(-100%);
-  }
-  100%{
-    transform: translateX(0px);
-  }
-`
-
-const Description=styled.div<{startAnimation:boolean}>`
-  font-size:2rem;
-  line-height:4rem;
-  white-space:nowrap;
-  animation: ${(props)=>props.startAnimation? SlideRightDescription:null} 1s linear;
-  @media screen and (max-width:900px){
-    font-size:1.2rem;
-    line-height:3rem;
-  }
-`
-
-const RotateInfo=keyframes`
-  0%, 100%{
-      transform: rotate(-1deg);
-  }
-  50%{
-      transform: rotate(1deg)
-  }
-
 `
 
 const InfoDiv=styled.div`
-  width:40%;
-  height:80%;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  @media screen and (max-width:900px){
-    width:100%;
-  }
-  
-`
-
-const Info=styled.div`
   width:100%;
-  height:100px;
+  height:100%;
+  max-width:500px;
+  min-width:310px;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+`
+const InfoSliderWrapper=styled.div`
+    width:100%;
+    height:100%;
+    display:flex;
+`
+const SliderButtonWrapper=styled.div`
+    position:relative;
+    display:flex;
+    width:40%;
+    height:80%;
+    @media screen and (max-width:900px){
+    width:100%;
+    height: 60%;
+  }
+`
+const Button=styled.button`
+  font-size:1rem;
+  border-radius:50%;
+  background-color:#87CEEB;
+  color:white;
+  border:none;
+  width:30px;
+  height:30px;
+  text-align:center;
+  margin: 0 2%;
   display:flex;
   align-items:center;
-  padding: 0 5%;
-  justify-content:space-around;
-  box-shadow: rgba(149, 160, 165, 0.2) 0px 8px 24px;
-  animation: ${RotateInfo} 1s infinite linear;
-  &:nth-child(2){
-    animation: ${RotateInfo} 1s 1.5s infinite linear;
-  }
-  &:nth-child(3){
-    animation: ${RotateInfo} 1s 3s infinite linear;
-  }
-  &:nth-child(4){
-    animation: ${RotateInfo} 1s 4.5s infinite linear;
+  justify-content:center;
+  position:absolute;
+  top:50%;
+  @media screen and (max-width:768px){
+    width:20px;
+    height:20px;
+    font-size:0.8rem;
   }
 `
-const InfoTitle=styled.span`
-  font-size:2rem;
-  @media screen and (max-width:900px){
-    font-size:1.5rem;
-  }
-  
-`
-const InfoContent=styled.span`
-  font-size:1rem;
+type AboutProps={
+  aboutRef:React.ForwardedRef<HTMLDivElement|null>;
+  nextRef:React.ForwardedRef<HTMLDivElement|null>;
+}
 
-`
+export function About(prop:AboutProps){
+  const [currentInfo, setCurrentInfo]=useState(0);
+  const SlideRef=useRef<HTMLDivElement>(null);
 
-const BoldFont=styled.span`
-  font-family:"SUITE-Bold";
-`
-
-const BorderBottomGradient=styled.span`
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: 100% 30%;
-  background-image: linear-gradient(90deg, #7FB4E2 0%,#aad4e4 100%);
-`
-export function About(){
-    const {ref, inView}=useInView();
-    const [onAbout, setOnAbout]=useState(true);
-    const InfoData=[
-      {
-        title:'이메일',
-        content:'hyunji0483@naver.com'
-      },
-      {
-        title:'학력',
-        content:'경북대학교 컴퓨터학부'
-      },
-      {
-        title:'경력',
-        content:'다이브(주) 프리랜서 개발자'
-      },
-      {
-        title:'사이트',
-        content:'https://1eehyunji.tistory.com/'
-      }
-    ]
-
-    const renderInfoData=():JSX.Element[]=>{
-      const returnRenderInfoData=InfoData.map(
-        (data)=>{
-          return (
-          <Info>
-            <InfoTitle>{data.title}</InfoTitle>
-            <InfoContent>{data.content}</InfoContent>
-          </Info>
-          );
-        }
-      );
-      return returnRenderInfoData;  
+  useEffect(()=>{
+    if(SlideRef.current){
+        const slideRange=SlideRef.current.offsetWidth*currentInfo;
+        SlideRef.current.style.transition = "all 0.5s ease-in-out";
+        SlideRef.current.style.transform=`translateX(-${slideRange}px)`
     }
+  },[currentInfo])
 
-    useEffect(()=>{
-      if (inView){
-        setOnAbout(true)
+  const onClickPrevButton=()=>{
+      if (currentInfo===0){
+        setCurrentInfo(4);
       }
       else{
-        setOnAbout(false)
+        setCurrentInfo((cur)=>cur-1);
+      } 
+  }
+  
+  const onClickNextButton=()=>{
+      if (currentInfo===4){
+        setCurrentInfo(0);
       }
-    },[inView])
+      else{
+        setCurrentInfo((cur)=>cur+1);
+      } 
+  }
     return(
-    <Div>
-        <Description ref={ref} startAnimation={onAbout}>
-          <BoldFont>성취하며 느낀 행복</BoldFont>을 오랫동안 기억하고,
-          <br/>
-          <BorderBottomGradient><BoldFont>차근차근</BoldFont> 꾸준하게</BorderBottomGradient> 성장 중인
-          <br/>
-          <BoldFont>프론트엔드</BoldFont> 개발자 <BorderBottomGradient><BoldFont>이현지</BoldFont></BorderBottomGradient>입니다.
-        </Description>
+    <Div ref={prop.aboutRef}>
+        <Descriptions/>
+        {/* slider 컴포넌트화 필요 */}
+        <SliderButtonWrapper>
+        <Button onClick={onClickPrevButton} style={{left:'-10%'}}>
+            <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
+        </Button>
         <InfoDiv>
-          {renderInfoData()}
+          <InfoSliderWrapper ref={SlideRef}>
+            {RenderContact()}
+            {RenderEducation()}
+            {RenderCareer()}
+            {RenderPrize()}
+            {RenderEtc()}
+          </InfoSliderWrapper>
         </InfoDiv>
-
-        <DownButton location={2}/>
+        <Button onClick={onClickNextButton} style={{right:'-10%'}}>
+            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+        </Button>
+        </SliderButtonWrapper>
+        <DownButton location={prop.nextRef}/>
     </Div>
     );
 }

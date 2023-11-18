@@ -2,20 +2,11 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styled, { keyframes } from "styled-components";
 
-const SlideDownTitle=keyframes`
-  0%{
-    transform: translateY(-100%);
-  }
-  100%{
-    transform: translateY(0px);
-  }
-`
-const TitleDiv=styled.div<{startAnimation:boolean}>`
+const TitleDiv=styled.div`
   position:absolute;
   white-space:nowrap;
   font-family:'jejudoldam';
   z-index:1;
-  animation: ${(props)=>props.startAnimation? SlideDownTitle:null} 0.5s linear;
 `
 const TitleUnmask = styled.h1`
   color:transparent;
@@ -46,7 +37,7 @@ const translateTitleMask=(move:number)=>keyframes`
 `
 interface TitleProps{
   height:number;
-  startAnimation:boolean;
+  startanimation:boolean;
 }
 
 const TextBackgroundOnMouseMove=styled.div<TitleProps>`
@@ -57,7 +48,7 @@ const TextBackgroundOnMouseMove=styled.div<TitleProps>`
   top:0;
   overflow:hidden;
   -webkit-text-stroke: 1px black;
-  animation: ${(props)=>props.startAnimation? translateBackgroundMask(props.height) :null} 5s linear infinite;
+  animation: ${(props)=>props.startanimation? translateBackgroundMask(props.height) :null} 5s linear infinite;
   @media screen and (max-width:900px){
       height:50px;
     }
@@ -65,7 +56,7 @@ const TextBackgroundOnMouseMove=styled.div<TitleProps>`
 
 const TitleMask = styled.h1<TitleProps>`
   font-size:7.9rem;
-  animation: ${(props)=>props.startAnimation? translateTitleMask(-props.height) :null} 5s linear infinite;
+  animation: ${(props)=>props.startanimation? translateTitleMask(-props.height) :null} 5s linear infinite;
   @media screen and (max-width:900px){
       font-size:5rem;
     }
@@ -94,10 +85,10 @@ export function Title(){
     },[inView])
 
     return(
-        <TitleDiv ref={ref} startAnimation={onTitle} id="title">
+        <TitleDiv ref={ref} className={onTitle?"startAnimation":""} id="title">
             <TitleUnmask>Frontend<br/>Portfolio</TitleUnmask>
-            <TextBackgroundOnMouseMove height={PosY} startAnimation={onTitle}>
-                <TitleMask height={PosY} startAnimation={onTitle}> Frontend<br/>Portfolio</TitleMask>
+            <TextBackgroundOnMouseMove height={PosY} startanimation={onTitle}>
+                <TitleMask height={PosY} startanimation={onTitle}> Frontend<br/>Portfolio</TitleMask>
             </TextBackgroundOnMouseMove>
         </TitleDiv>
 
