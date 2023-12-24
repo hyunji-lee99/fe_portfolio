@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import { DownButton } from "../components/common/DownButton";
-import { ClickMessage } from "../components/Skill/ClickMessage";
 import {RotateSkillCube} from "../components/Skill/RotateSkillCube";
 
 const Div = styled.div`

@@ -61,14 +61,8 @@ const CardLink=styled.a`
     margin-top:10px;
     display:flex;
     align-items:center;
-    /* white-space:nowrap; */
-    /* background-image:url("/images/skillset/github.svg");
-    background-repeat:no-repeat;
-    background-size:25px; */
     width:100%;
     height:25px;
-    /* background-position:0px center; */
-    /* padding-left:30px; */
     text-decoration:none;
     color:#414141;
 `
@@ -124,28 +118,27 @@ type ProjectCardProp={
 function ProjectCard(prop:ProjectCardProp) {
     const CardInfoRef=useRef<HTMLDivElement>(null);
     const CardDetailRef=useRef<HTMLDivElement>(null);
-    const mutationObserver=new MutationObserver(async()=>{
-        // CardInfo랑 CardDetailDiv 애니메이션 실행
-        if (CardInfoRef.current && CardDetailRef.current){
-            CardInfoRef.current.classList.remove("startanimation");
-            CardDetailRef.current.classList.remove("startanimation");
-            //브라우저에 dom에 대한 정보(width)를 요청하면서 강제로 브라우저에게 일을 시키게 할 뿐이다
-            void CardInfoRef.current.offsetHeight;
-            CardInfoRef.current.classList.add("startanimation");
-            CardDetailRef.current.classList.add("startanimation");
-        }
 
-        
-    })
     useEffect(()=>{
         if (CardInfoRef.current){
+            const mutationObserver=new MutationObserver(async()=>{
+                // CardInfo랑 CardDetailDiv 애니메이션 실행
+                if (CardInfoRef.current && CardDetailRef.current){
+                    CardInfoRef.current.classList.remove("startanimation");
+                    CardDetailRef.current.classList.remove("startanimation");
+                    //브라우저에 dom에 대한 정보(width)를 요청하면서 강제로 브라우저에게 일을 시키게 할 뿐이다
+                    void CardInfoRef.current.offsetHeight;
+                    CardInfoRef.current.classList.add("startanimation");
+                    CardDetailRef.current.classList.add("startanimation");
+                }
+            })
             mutationObserver.observe(CardInfoRef.current, {
                 childList:true,
                 subtree:true,
             })
         }
-       
     },[])
+
     return (
         <CardDiv>
             <CardInfo ref={CardInfoRef}>

@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { styled } from "styled-components";
+import { useEffect, useRef } from "react";
+import { keyframes, styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-
+import { useInView } from "react-intersection-observer";
 import { DownButton } from "../components/common/DownButton";
 import { RenderEducation } from "../components/About/RenderEducation";
 import { RenderCareer } from "../components/About/RenderCareer";
@@ -11,6 +11,8 @@ import { RenderContact } from "../components/About/RenderContact";
 import { RenderPrize } from "../components/About/RenderPrize";
 import { Descriptions } from "../components/About/Descriptions";
 import '../fonts/font.css';
+import { useRecoilState } from "recoil";
+import { currentPageState, onSliderState } from "../recoil/AboutState";
 
 const Div = styled.div`
   width:100vw;
@@ -42,6 +44,15 @@ const InfoSliderWrapper=styled.div`
     height:100%;
     display:flex;
 `
+const SlideLeft=keyframes`
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+`
+
 const SliderButtonWrapper=styled.div`
     position:relative;
     display:flex;
@@ -50,6 +61,9 @@ const SliderButtonWrapper=styled.div`
     @media screen and (max-width:900px){
     width:100%;
     height: 60%;
+  }
+  &.startAnimation{
+    animation: ${SlideLeft} 0.5s linear;
   }
 `
 const Button=styled.button`
@@ -79,39 +93,47 @@ type AboutProps={
 }
 
 export function About(prop:AboutProps){
-  const [currentInfo, setCurrentInfo]=useState(0);
+  const [currentPage, setCurrentPage]=useRecoilState(currentPageState);
+  const [onSlider, setOnSlider]=useRecoilState(onSliderState);
   const SlideRef=useRef<HTMLDivElement>(null);
-
+  const {ref,inView}=useInView()
   useEffect(()=>{
     if(SlideRef.current){
-        const slideRange=SlideRef.current.offsetWidth*currentInfo;
+        const slideRange=SlideRef.current.offsetWidth*currentPage;
         SlideRef.current.style.transition = "all 0.5s ease-in-out";
         SlideRef.current.style.transform=`translateX(-${slideRange}px)`
     }
-  },[currentInfo])
+    if (inView){
+      setOnSlider(true);
+    }
+    else{
+      setOnSlider(false);
+    }
+
+  },[currentPage,inView, setOnSlider])
 
   const onClickPrevButton=()=>{
-      if (currentInfo===0){
-        setCurrentInfo(4);
+      if (currentPage===0){
+        setCurrentPage(4);
       }
       else{
-        setCurrentInfo((cur)=>cur-1);
+        setCurrentPage((cur)=>cur-1);
       } 
   }
   
   const onClickNextButton=()=>{
-      if (currentInfo===4){
-        setCurrentInfo(0);
+      if (currentPage===4){
+        setCurrentPage(0);
       }
       else{
-        setCurrentInfo((cur)=>cur+1);
+        setCurrentPage((cur)=>cur+1);
       } 
   }
     return(
     <Div ref={prop.aboutRef}>
         <Descriptions/>
         {/* slider 컴포넌트화 필요 */}
-        <SliderButtonWrapper>
+        <SliderButtonWrapper ref={ref} className={onSlider?"startAnimation":""}>
         <Button onClick={onClickPrevButton} style={{left:'-10%'}}>
             <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
         </Button>

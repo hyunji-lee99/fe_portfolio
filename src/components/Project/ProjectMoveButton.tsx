@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
 import "../../fonts/font.css";
+import { ProjectPageState } from "../../recoil/ProjectState";
 
 const ButtonDiv=styled.div`
     position:absolute;
@@ -49,15 +50,11 @@ const ButtonClickIcon=styled.img`
     width:30px;
     
 `
-type ProjectMoveButtonProp={
-    PageSelect:Dispatch<SetStateAction<number>>
-}
 
-function ProjectMoveButton(prop:ProjectMoveButtonProp){
-    const [cur,setCur]=useState(0);
+function ProjectMoveButton(){
+    const [ProjectPage,setProjectPage]=useRecoilState(ProjectPageState);
     const onClickButton=(pageNum:number)=>{
-        prop.PageSelect(pageNum);
-        setCur(pageNum);
+        setProjectPage(pageNum);
     }
     return(
         <ButtonDiv>
@@ -65,11 +62,11 @@ function ProjectMoveButton(prop:ProjectMoveButtonProp){
                 <div>Click<br/>button</div>
                 <ButtonClickIcon src="/images/skillset/arrow.png"/>
             </ButtonClickMessage>
-            <Button className={cur===0?"currentPage":""} onClick={()=>onClickButton(0)}/>
-            <Button className={cur===1?"currentPage":""} onClick={()=>onClickButton(1)}/>
-            <Button className={cur===2?"currentPage":""} onClick={()=>onClickButton(2)}/>
-            <Button className={cur===3?"currentPage":""} onClick={()=>onClickButton(3)}/>
-            <Button className={cur===4?"currentPage":""} onClick={()=>onClickButton(4)}/>
+            <Button className={ProjectPage===0?"currentPage":""} onClick={()=>onClickButton(0)}/>
+            <Button className={ProjectPage===1?"currentPage":""} onClick={()=>onClickButton(1)}/>
+            <Button className={ProjectPage===2?"currentPage":""} onClick={()=>onClickButton(2)}/>
+            <Button className={ProjectPage===3?"currentPage":""} onClick={()=>onClickButton(3)}/>
+            <Button className={ProjectPage===4?"currentPage":""} onClick={()=>onClickButton(4)}/>
         </ButtonDiv>
     );
 }

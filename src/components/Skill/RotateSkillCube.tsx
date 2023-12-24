@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
+import { onClickCubeState, onCubeState } from "../../recoil/SkillState";
 import { ClickMessage } from "./ClickMessage";
 import { SkillDetail } from "./SkillDetail";
 
@@ -86,8 +88,8 @@ const CubeSide=styled.div`
 
 export function RotateSkillCube(){
     const {ref, inView}=useInView();
-    const [onCubeClick, setOnCubeClick]=useState(false);
-    const [onCube, setOnCube]=useState(true);
+    const [onCubeClick, setOnCubeClick]=useRecoilState(onClickCubeState);
+    const [onCube, setOnCube]=useRecoilState(onCubeState);
     
     useEffect(()=>{
         if (inView){
@@ -97,7 +99,7 @@ export function RotateSkillCube(){
         else{
             setOnCube(false);
         }
-    },[inView])
+    },[inView, setOnCube, setOnCubeClick])
 
     return (
     <div style={{position:'relative'}}>

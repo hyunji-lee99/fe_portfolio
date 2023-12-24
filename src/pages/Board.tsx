@@ -4,7 +4,9 @@ import { BoardList } from "../components/Board/BoardList";
 import { InputMessage } from "../components/Board/InputMessage";
 import Snowfall from "react-snowfall";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { onSnowState } from "../recoil/BoardState";
 
 
 const Div = styled.div`
@@ -33,7 +35,7 @@ type BoardProps={
 
 export function Board(prop:BoardProps){
     const {ref, inView}=useInView();
-    const [onSnow, setOnSnow]=useState(false);
+    const [onSnow, setOnSnow]=useRecoilState(onSnowState);
     useEffect(()=>{
       if (inView){
         setOnSnow(true)
@@ -41,7 +43,7 @@ export function Board(prop:BoardProps){
       else {
         setOnSnow(false)
       }
-    },[inView])
+    },[inView, setOnSnow])
 
     return(
     <Div ref={prop.boardRef}>

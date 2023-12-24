@@ -70,7 +70,6 @@ export function DownButton(prop:DownButtonProps){
         if (typeof prop.location!=="function"){
             prop.location?.current?.scrollIntoView({behavior:"smooth"});
         }
-        // window.scrollTo({left:0, top:location.location*window.innerHeight, behavior:'smooth'})
     }
     return(
         <ButtonDiv onClick={onDownButton}>
