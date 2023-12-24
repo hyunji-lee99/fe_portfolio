@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-
+import { useInView } from "react-intersection-observer";
 import { DownButton } from "../components/common/DownButton";
 import { RenderEducation } from "../components/About/RenderEducation";
 import { RenderCareer } from "../components/About/RenderCareer";
@@ -42,6 +42,15 @@ const InfoSliderWrapper=styled.div`
     height:100%;
     display:flex;
 `
+const SlideLeft=keyframes`
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+`
+
 const SliderButtonWrapper=styled.div`
     position:relative;
     display:flex;
@@ -50,6 +59,9 @@ const SliderButtonWrapper=styled.div`
     @media screen and (max-width:900px){
     width:100%;
     height: 60%;
+  }
+  &.startAnimation{
+    animation: ${SlideLeft} 0.5s linear;
   }
 `
 const Button=styled.button`
@@ -80,15 +92,23 @@ type AboutProps={
 
 export function About(prop:AboutProps){
   const [currentInfo, setCurrentInfo]=useState(0);
+  const [onSlider, setOnSlider]=useState(false);
   const SlideRef=useRef<HTMLDivElement>(null);
-
+  const {ref,inView}=useInView()
   useEffect(()=>{
     if(SlideRef.current){
         const slideRange=SlideRef.current.offsetWidth*currentInfo;
         SlideRef.current.style.transition = "all 0.5s ease-in-out";
         SlideRef.current.style.transform=`translateX(-${slideRange}px)`
     }
-  },[currentInfo])
+    if (inView){
+      setOnSlider(true);
+    }
+    else{
+      setOnSlider(false);
+    }
+
+  },[currentInfo,inView])
 
   const onClickPrevButton=()=>{
       if (currentInfo===0){
@@ -111,7 +131,7 @@ export function About(prop:AboutProps){
     <Div ref={prop.aboutRef}>
         <Descriptions/>
         {/* slider 컴포넌트화 필요 */}
-        <SliderButtonWrapper>
+        <SliderButtonWrapper ref={ref} className={onSlider?"startAnimation":""}>
         <Button onClick={onClickPrevButton} style={{left:'-10%'}}>
             <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
         </Button>

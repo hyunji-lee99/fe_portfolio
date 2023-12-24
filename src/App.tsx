@@ -5,6 +5,7 @@ import { Project } from './pages/Project';
 import { Board } from './pages/Board';
 import HeaderMenu from './components/HeaderMenu';
 import { useRef } from 'react';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   const IntroRef=useRef<HTMLDivElement>(null);
@@ -15,14 +16,14 @@ function App() {
   const RefList=[IntroRef, AboutRef, SkillRef, ProjectRef, BoardRef];
 
   return (
-        <>
+        <RecoilRoot>
           <HeaderMenu menuRef={RefList}/>
           <Intro introRef={IntroRef} nextRef={AboutRef}/>
           <About aboutRef={AboutRef} nextRef={SkillRef}/>
           <Skill skillRef={SkillRef} nextRef={ProjectRef}/>
           <Project projectRef={ProjectRef} nextRef={BoardRef}/>
           <Board boardRef={BoardRef}/>
-        </>
+        </RecoilRoot>
   );
 }
 

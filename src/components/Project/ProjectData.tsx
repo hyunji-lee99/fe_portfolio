@@ -15,7 +15,7 @@ export const ProjectData=[
     {
         title:"Portfolio",
         member:"Solo Project",
-        images:["/images/project/portfolio/portfolio-1.png","/images/project/portfolio/portfolio-2.png","/images/project/portfolio/portfolio-3.png","/images/project/portfolio/portfolio-4.png"],
+        images:["/images/project/portfolio/portfolio-1.png","/images/project/portfolio/portfolio-2.png","/images/project/portfolio/portfolio-3.png","/images/project/portfolio/portfolio-4.png","/images/project/portfolio/portfolio-5.png"],
         github:"https://github.com/hyunji-lee99/fe_portfolio",
         hosturl:"https://1eehyunji.com/",
         introduce:"지금까지 쌓아온 프론트엔드 기술 역량을 보여주고, 개발 과정에서 더 나은 코드와 구조, 기술에 대한 학습을 위해 동적인 반응형 웹 프론트엔드 포트폴리오 페이지를 개발 중에 있습니다. 꾸준히 코드 리팩토링을 진행할 예정입니다.",

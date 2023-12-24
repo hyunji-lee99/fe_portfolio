@@ -26,5 +26,5 @@ export function Project(prop:ProjectProps){
         <ProjectList index={curPage}/>
         <ProjectMoveButton PageSelect={setCurPage}/>
         <DownButton location={prop.nextRef}/>
-    </Div>);
+    </Div>);  
 }
