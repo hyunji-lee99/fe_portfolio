@@ -1,4 +1,4 @@
-import {Info, InfoContentDiv, InfoTitle, InfoContent, InfoContentDetail, InfoContentElementDiv} from "./CommonInfo";
+import {Info, InfoContentDiv, InfoTitle } from "./CommonInfo";
 import styled from "styled-components";
 
 const ContactInfoDiv=styled.div`
