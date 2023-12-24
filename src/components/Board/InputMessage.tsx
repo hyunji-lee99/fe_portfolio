@@ -1,9 +1,11 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { postMessage } from '../../firebase';
 import "../../fonts/font.css";
+import { InputDataState } from '../../recoil/BoardState';
 
 const InputForm=styled.form`
     width: 100%;
@@ -72,25 +74,35 @@ const SubmitButton=styled.button`
     
 
 export function InputMessage() {
-    const [inputAuthor, setInputAuthor]=useState('');
-    const [inputContent, setInputContent]=useState('');
+    // const [inputAuthor, setInputAuthor]=useState('');
+    // const [inputContent, setInputContent]=useState('');
+    const [inputData, setInputData]=useRecoilState(InputDataState);
 
     const onChangeAuthor=(e:React.ChangeEvent<HTMLInputElement>)=>{
-        setInputAuthor(e.target.value);
+        // setInputAuthor(e.target.value);
+        setInputData({
+            ...inputData,
+            author: e.target.value
+        })
     }
     const onChangeContent=(e:React.ChangeEvent<HTMLInputElement>)=>{
-        setInputContent(e.target.value);
+        setInputData({
+            ...inputData,
+            content: e.target.value
+        })
     }
     const onSubmitMessage=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        if (inputAuthor!=='' && inputContent!==''){
+        if (inputData.author!=='' && inputData.content!==''){
             postMessage({
-                author:inputAuthor,
-                content:inputContent,
+                author:inputData.author,
+                content:inputData.content,
                 createdAt:Date.now()
             });
-            setInputAuthor('');
-            setInputContent('');
+            setInputData({
+                author:'',
+                content:''
+            })
         }
         else{
             alert('내용을 입력해주세요!')
@@ -100,8 +112,8 @@ export function InputMessage() {
     return (
         <InputForm onSubmit={onSubmitMessage}>
             <InputDiv>
-                <NameInput onChange={onChangeAuthor} value={inputAuthor} placeholder="이름 또는 별명을 입력해주세요!"/>
-                <ContentInput onChange={onChangeContent} value={inputContent} placeholder="하고 싶은 말을 입력해주세요!"/>
+                <NameInput onChange={onChangeAuthor} value={inputData.author} placeholder="이름 또는 별명을 입력해주세요!"/>
+                <ContentInput onChange={onChangeContent} value={inputData.content} placeholder="하고 싶은 말을 입력해주세요!"/>
             </InputDiv>
             <SubmitButton type='submit'>
                 <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>

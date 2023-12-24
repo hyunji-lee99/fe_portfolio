@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
+import { posYState, titleState } from "../../recoil/IntroState";
 
 const TitleDiv=styled.div`
   position:absolute;
@@ -66,13 +68,13 @@ const TitleMask = styled.h1<TitleProps>`
 `
 
 export function Title(){
-    const [PosY, setPosY]=useState(0);
-    const [onTitle, setOnTitle]=useState(true);
+    const [PosY, setPosY]=useRecoilState(posYState);
+    const [onTitle, setOnTitle]=useRecoilState(titleState);
     const {ref, inView}=useInView();
     
     useEffect(()=>{
       if (inView){
-        setOnTitle(true);
+        setOnTitle(true)
         const titleElement=document.getElementById('title');
                 if (titleElement){
                   const titleDivInfo=titleElement.getBoundingClientRect();
@@ -82,7 +84,7 @@ export function Title(){
       else{
         setOnTitle(false)
       }
-    },[inView])
+    },[inView, setOnTitle, setPosY])
 
     return(
         <TitleDiv ref={ref} className={onTitle?"startAnimation":""} id="title">

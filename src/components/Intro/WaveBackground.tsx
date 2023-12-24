@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { useRecoilState } from "recoil";
 import styled, {keyframes} from "styled-components";
+import { waveState } from "../../recoil/IntroState";
 
 const Ocean = styled.div`
   height: 30%;
@@ -51,7 +53,7 @@ const Wave = styled.div`
 
 export function WaveBackground(){
   const {ref, inView}=useInView();
-  const [onWave, setOnWave]=useState(true);
+  const [onWave, setOnWave]=useRecoilState(waveState);
   useEffect(()=>{
     if (inView){
       setOnWave(true);
@@ -60,7 +62,7 @@ export function WaveBackground(){
       setOnWave(false);
     }
     
-  },[inView])
+  },[inView, setOnWave])
   
     return(
         <Ocean ref={ref}>
@@ -70,3 +72,4 @@ export function WaveBackground(){
 
     );
 }
+

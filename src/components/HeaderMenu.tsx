@@ -128,6 +128,7 @@ const HeaderMenu=(prop:HeaderMenuProps)=>{
       <HeaderDiv className={respMenu?"responsive":""}>
         <Logo onClick={onClickIntro}>HYUNJI</Logo>
         {respMenu?
+        // 반응형 메뉴
         <RespMenuUnderLogo>
           <li onClick={onClickAbout}>ABOUT</li>
           <li onClick={onClickSkill}>SKILL</li>

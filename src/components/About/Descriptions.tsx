@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useRecoilState } from 'recoil';
 import { keyframes, styled } from 'styled-components';
+import { onDescriptionState } from '../../recoil/AboutState';
 
 const SlideRightDescription=keyframes`
   0%{
@@ -37,18 +39,18 @@ const BorderBottomGradient=styled.span`
 
 export function Descriptions() {
     const {ref, inView}=useInView();
-    const [onAbout, setOnAbout]=useState(true);
+    const [onDescription, setOnDescription]=useRecoilState(onDescriptionState);
     useEffect(()=>{
         if (inView){
-          setOnAbout(true)
+          setOnDescription(true)
         }
         else{
-          setOnAbout(false)
+          setOnDescription(false)
         }
-      },[inView])
+      },[inView, setOnDescription])
       
     return (
-        <Description ref={ref} className={onAbout?"startanimation":""}>
+        <Description ref={ref} className={onDescription?"startanimation":""}>
             <BoldFont>성취하며 느낀 행복</BoldFont>을 오랫동안 기억하고,
             <br/>
             <BorderBottomGradient><BoldFont>차근차근</BoldFont> 꾸준하게</BorderBottomGradient> 성장 중인

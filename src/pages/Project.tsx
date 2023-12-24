@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { styled } from "styled-components";
 import { DownButton } from "../components/common/DownButton";
 import ProjectList from "../components/Project/ProjectList";
@@ -20,11 +19,11 @@ type ProjectProps={
 }
 
 export function Project(prop:ProjectProps){
-    const [curPage, setCurPage]=useState<number>(0);
     return(
     <Div ref={prop.projectRef}>
-        <ProjectList index={curPage}/>
-        <ProjectMoveButton PageSelect={setCurPage}/>
+        <ProjectList/>
+        <ProjectMoveButton/>
         <DownButton location={prop.nextRef}/>
     </Div>);  
 }
+
