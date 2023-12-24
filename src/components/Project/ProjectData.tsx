@@ -27,7 +27,7 @@ export const ProjectData=[
         옵저버 패턴을 적용한 애니메이션
         `
         ,
-        skillstack:"React, TypeScript, Styled-components, Firebase"
+        skillstack:"React, TypeScript, Recoil, Styled-components, Firebase"
     },
     {
         title:"QRcode 모바일 명함",

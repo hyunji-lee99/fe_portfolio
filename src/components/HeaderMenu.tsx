@@ -71,7 +71,7 @@ const RespMenuUnderLogo=styled.ul`
     position:absolute;
     display:flex;
     flex-direction:column;
-    justify-content:space-around;
+    justify-content:space-evenly;
     width:100%;
     height:200%;
     text-align:center;

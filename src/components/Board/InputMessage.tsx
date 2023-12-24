@@ -109,11 +109,18 @@ export function InputMessage() {
         }
        
     }
+
+    const onKeyDownEnter=(e:React.KeyboardEvent<HTMLInputElement>)=>{
+        if (e.key==='Enter'){
+            e.preventDefault();
+        }
+    }
+
     return (
         <InputForm onSubmit={onSubmitMessage}>
             <InputDiv>
-                <NameInput onChange={onChangeAuthor} value={inputData.author} placeholder="이름 또는 별명을 입력해주세요!"/>
-                <ContentInput onChange={onChangeContent} value={inputData.content} placeholder="하고 싶은 말을 입력해주세요!"/>
+                <NameInput onChange={onChangeAuthor} value={inputData.author}  onKeyDown={onKeyDownEnter} placeholder="이름 또는 별명을 입력해주세요!"/>
+                <ContentInput onChange={onChangeContent} value={inputData.content} onKeyDown={onKeyDownEnter} placeholder="하고 싶은 말을 입력해주세요!"/>
             </InputDiv>
             <SubmitButton type='submit'>
                 <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
